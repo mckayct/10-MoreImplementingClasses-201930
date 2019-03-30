@@ -90,7 +90,6 @@ class Point(object):
         """ Sets instance variables  x  and  y  to the given coordinates. """
         self.x = x
         self.y = y
-
     def __repr__(self):
         """
         Returns a string representation of this Point.
@@ -375,7 +374,10 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
+        Point.clone(self.end)
+        Point.clone(self.start)
 
+        return Line(Point.clone(self.end), Point.clone(self.start))
 
     def slope(self):
         """
@@ -650,7 +652,7 @@ class Line(object):
           :rtype: bool
         """
         # ---------------------------------------------------------------------
-        # TODO: 12.
+        # DONE: 12.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -686,17 +688,9 @@ class Line(object):
         # are different from each other.
         #######################################################################
 
-        run = (self.end.x - self.start.x)
-        run2 = (line2.end.x - line2.start.x)
-        if run and run2 != 0:
-            slope = (self.end.y - self.start.y) / (self.end.x - self.start.x)
-        if run2 != 0:
-            slope2 = (self.end.y - self.start.y) / (self.end.x - self.start.x)
-        if run == 0:
-            slope = math.inf
-        if run2 == 0:
-            slope2 =  math.inf
-        if slope == slope2:
+        slope = self.slope()
+        slope2 = line2.slope()
+        if round(slope,12) == round(slope2,12):
             return True
         else:
             return False
@@ -739,6 +733,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
+
+        start = self.start
+        end = self.end
 
 
 ###############################################################################
