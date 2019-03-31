@@ -226,6 +226,8 @@ class Line(object):
         self.start = start.clone()
         self.end = end.clone()
         self.number_of_clones = 0
+        self.initstart = self.start.clone()
+        self.initend = self.end.clone()
 
     def __repr__(self):
         """
@@ -365,7 +367,7 @@ class Line(object):
             print(line1 == line2)    # Should now print: True
         """
         # ---------------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -374,10 +376,10 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        Point.clone(self.end)
-        Point.clone(self.start)
+        place = self.end
+        self.end = self.start
+        self.start = place
 
-        return Line(Point.clone(self.end), Point.clone(self.start))
 
     def slope(self):
         """
@@ -734,8 +736,9 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        start = self.start
-        end = self.end
+        self.start = self.initstart
+        self.end = self.initend
+
 
 
 ###############################################################################
